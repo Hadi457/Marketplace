@@ -1,0 +1,15 @@
+:root {
+  --color-1: #141619; /* Hitam pekat */
+  --color-2: #202E5A; /* Biru tua (dikoreksi dari 202ESA) */
+  --color-3: #050A44; /* Biru navy sangat gelap */
+  --color-4: #0A21C0; /* Biru royal cerah */
+  --color-5: #B3B4BD; /* Abu-abu biru muda */
+}
+
+body {
+  background-color: var(--color-1);
+  color: var(--color-5);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
