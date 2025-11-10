@@ -28,7 +28,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Tombol “Masuk” — tombol utama */
 .btn-primary {
     background-color: var(--black);
     color: white;
@@ -40,7 +39,6 @@ body {
     border-color: var(--black);
 }
 
-/* Tombol “Daftar” — outline */
 .btn-outline {
     background-color: white;
     color: var(--malachite);

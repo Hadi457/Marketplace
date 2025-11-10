@@ -1,16 +1,16 @@
 @extends('navbar')
 @section('content')
 <link rel="stylesheet" href="{{asset('style/home.css')}}">
-<div class="jumbotron mt-5">
-    <h1 class="display-4">Marketplace Sekolah Digital</h1>
-    <p class="lead">Tempat terbaik untuk membeli dan menjual kebutuhan sekolah secara mudah, aman, dan terpercaya.</p>
-    <hr class="my-4">
-    <p>Lengkapi kebutuhan sekolahmu, dari alat tulis hingga seragam, hanya di Skoola!</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Mulai Belanja</a>
-    </p>
-</div>
 <section class="container py-5">
+    <div class="jumbotron mt-5">
+        <h1 class="display-4">Marketplace Sekolah Digital</h1>
+        <p class="lead">Tempat terbaik untuk membeli dan menjual kebutuhan sekolah secara mudah, aman, dan terpercaya.</p>
+        <hr class="my-4">
+        <p>Lengkapi kebutuhan sekolahmu, dari alat tulis hingga seragam, hanya di Skoola!</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Mulai Belanja</a>
+        </p>
+    </div>
     <div class="d-flex align-items-start justify-content-between mb-3">
         <div>
             <h2 class="h3 mb-1">Toko Terbaik</h2>

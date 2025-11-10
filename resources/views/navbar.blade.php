@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container py-3">
-            <h2 class="logo" href="#">Skoola</h2>
+            <h2 class="logo" href="/">Skoola</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,7 +47,7 @@
                     </form>
                     <div class="d-flex justify-content-center mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Produk</a>
@@ -56,7 +56,7 @@
                             <a class="nav-link" href="#">Toko</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hubungi Kami</a>
+                            <a class="nav-link" href="/about">Tentang Kami</a>
                         </li>
                     </div>
                 </ul>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container-fluid m-0 p-0">
         @yield('content')
     </div>
 </body>
