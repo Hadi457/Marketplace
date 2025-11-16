@@ -6,18 +6,6 @@
     --malachite: #16db65ff;
 }
 
-*, body, html {
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-.logo{
-    color: var(--black);
-    font-weight: bold;
-}
-
 .btn {
     padding: 8px 25px;
     border-radius: 10px;
@@ -29,27 +17,30 @@
 
 .btn-primary {
     background-color: var(--black);
-    color: white;
     border: 2px solid var(--black);
+    color: white;
 }
-
 .btn-primary:hover {
     background-color: var(--black);
     border-color: var(--black);
-}
-
-.btn-outline {
-    background-color: white;
     color: var(--malachite);
-    border: 2px solid var(--malachite);
+}
+.btn-primary:active {
+    background-color: var(--black) !important;
+    border-color: var(--black) !important;
 }
 
-.btn-outline:hover {
-    background-color: var(--malachite);
+.btn-warning {
+    background-color: var(--black);
+    border: 2px solid var(--black);
     color: white;
 }
-
-footer {
-  background-color: #f8f9fa;
+.btn-warning:hover {
+    background-color: var(--black);
+    color: var(--malachite);
+    border-color: var(--black);
 }
-
+.btn-warning:active {
+    background-color: var(--black) !important;
+    border-color: var(--black) !important;
+}

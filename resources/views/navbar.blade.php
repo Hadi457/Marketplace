@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="{{ asset('asset/fontawesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('asset/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('style/navbar.css') }}">
-    <!-- Preconnect biar lebih cepat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Import font Poppins (semua ketebalan dari 100 sampai 900) -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap" rel="stylesheet">
     <title>Skoola</title>
 </head>
 <body>
@@ -57,10 +55,24 @@
                         </li>
                     </div>
                 </ul>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-primary">Masuk</button>
-                    <button class="btn btn-outline">Daftar</button>
-                </div>
+                @if (Auth::check())
+                    <div class="dropdown">
+                        <button class="btn d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>{{Auth::user()->name}}</span>
+                            <i class="bi bi-person-circle fs-3 ms-3"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/toko/create">Buat Toko</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                @else
+                    <div class="d-flex gap-2">
+                        <a href="/login" class="btn btn-primary">Masuk</a>
+                        <a href="/register" class="btn btn-outline">Daftar</a>
+                    </div>
+                @endif
             </div>
         </div>
     </nav>
