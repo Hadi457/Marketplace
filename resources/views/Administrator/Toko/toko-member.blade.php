@@ -1,6 +1,6 @@
-@extends('Administrator.sidebar')
+@extends('navbar')
 @section('content')
-<link rel="stylesheet" href="{{asset('style/user.css')}}">
+<section class="container my-5">
 <!-- Modal Create Toko -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Toko</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{route('toko.admin.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('toko.member.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
 
@@ -58,23 +58,6 @@
                         </div>
                     </div>
 
-                    <!-- User ID -->
-                    <div class="mb-3">
-                        <label for="users_id" class="form-label fw-semibold">Pilih User <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                            <select name="users_id" id="users_id" class="form-select" required>
-                                <option value="">-- Pilih User --</option>
-                                
-                                {{-- Loop user (isi dari controller) --}}
-                                @foreach ($user as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->username }})</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="modal-footer">
@@ -85,8 +68,6 @@
         </div>
     </div>
 </div>
-
-
 @if (Session::get('pesan'))
     <div class="alert alert-success alert-dismissible fade show mb-1 mt-2" role="alert">
         <i class="fas fa-check-circle me-2"></i>
@@ -103,56 +84,71 @@
         </ul>
     </div>
 @endif
-<div class="container">
-    <div class="d-flex justify-content-between">
-        <h2 class="mt-4 fw-bold">Toko</h2>
-        <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mt-4">Tambah Toko</a>
-    </div>
-    <hr>
-    <table id="example" class="table table-striped nowrap" style="width:100%">
-        <thead>
-            <tr>
-                <th>Nama Toko</th>
-                <th>Deskripsi</th>
-                <th>Gambar</th>
-                <th>Kontak Toko</th>
-                <th>Alamat</th>
-                <th>Pemilik</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ( $stores as $item )
-                <tr>
-                    <td>{{ $item->nama_toko }}</td>
-                    <td>{{ $item->deskripsi }}</td>
-                    <td>
-                        <img src="{{ asset('storage/gambar-toko/' . $item->gambar) }}" width="100" height="100" alt="">
-                    </td>
-                    <td>{{ $item->kontak_toko }}</td>
-                    <td>{{ $item->alamat }}</td>
-                    <td>{{ $item->user->name }}</td>
-                    <td>
-                        {{-- <a type="button" data-bs-toggle="modal{{$item->id}}" data-bs-target="#editToko{{$item->id}}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a> --}}
-                        <a type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#editToko{{ $item->id }}"
-                                class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+    {{-- Jika belum punya toko --}}
+    @if(!$toko)
+        <div class="text-center my-5">
+            <h4 class="fw-bold mb-3">Anda belum memiliki toko</h4>
+            <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mt-4">
+                <i class="bi bi-shop me-1"></i> Buat Toko
+            </a>
+        </div>
+    @else
+        <!-- Profil Toko -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body d-flex flex-column flex-md-row align-items-center gap-3">
 
-                        <a href="{{route('toko.admin.delete',Crypt::encrypt($item->id))}}" class="btn btn-sm btn-warning"><i class="bi bi-trash-fill"></i></a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable({
-            responsive: true
-        });
-    });
-</script>
+                <!-- Logo / Foto Toko -->
+                <img src="#" alt="Toko" class="rounded-circle border" width="100" height="100" style="object-fit: cover;">
+
+                <!-- Info Toko -->
+                <div>
+                    <h3 class="mb-1 fw-bold">{{ $toko->nama_toko }}</h3>
+                    <p class="mb-0">
+                        <i class="bi bi-whatsapp me-1"></i>{{ $toko->kontak_toko }}
+                    </p>
+                </div>
+
+                <!-- Tombol WhatsApp -->
+                <div class="ms-md-auto">
+                    <a href="https://wa.me/{{ $toko->kontak_toko }}" target="_blank"
+                    style="background-color: #020202ff;" class="btn btn-success">
+                        <i class="bi bi-whatsapp me-1" style="color: #16DB65"></i> Hubungi via WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Deskripsi Toko -->
+        <div class="mb-5">
+            <h5 class="fw-semibold">Tentang Toko</h5>
+            <p class="text-muted">{{ $toko->deskripsi }}</p>
+        </div>
+
+        <!-- Daftar Produk -->
+        <div>
+            <h5 class="fw-semibold mb-3">Produk dari {{ $toko->name }}</h5>
+            <div class="row g-4">
+                {{-- Produk --}}
+                <div class="col-6 col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="{{asset('asset/image/SkoolaAssets/2.jpg')}}" class="card-img-top" alt="Pulpen Gel Hitam">
+                        <div class="card-body">
+                            <h6 class="card-title mb-1">Pulpen Gel Hitam</h6>
+                            <p class="text-muted small mb-2">{{ $toko->name }}</p>
+                            <strong class="text-dark">Rp5.000</strong>
+                        </div>
+                        <div class="d-flex p-2">
+                            <a class="btn btn-primary w-100">
+                                <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @endif
+
+</section>
 @endsection

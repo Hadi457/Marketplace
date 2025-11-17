@@ -2,19 +2,21 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('style/home.css')}}">
 <section class="container py-5">
-    <div class="jumbotron mt-5">
+    <div class="jumbotron">
         <h1 class="display-4">Marketplace Sekolah Digital</h1>
         <p class="lead">Tempat terbaik untuk membeli dan menjual kebutuhan sekolah secara mudah, aman, dan terpercaya.</p>
         <hr class="my-4">
         <p>Lengkapi kebutuhan sekolahmu, dari alat tulis hingga seragam, hanya di Skoola!</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Mulai Belanja</a>
+            <a class="btn btn-primary btn-lg" href="/produk" role="button">Mulai Belanja</a>
         </p>
     </div>
     <div class="d-flex align-items-start justify-content-between mb-3 mt-5">
         <div>
-            <h2 class="h3 mb-1">Toko Terbaik</h2>
-            <p class="text-muted mb-0">Penjual dengan rating & layanan terbaik—direkomendasikan oleh komunitas Skoola.</p>
+            <h2 class="h3 mb-1">Toko Terbaru</h2>
+            <p class="text-muted mb-0">
+                Jelajahi berbagai toko yang menawarkan kebutuhan sekolah terbaik untukmu.
+            </p>
         </div>
         <div class="align-self-center">
             <a href="#" class="btn btn-lihat">Lihat Semua</a>
@@ -22,87 +24,42 @@
     </div>
     <!-- Card -->
     <div class="row">
-        <div class="col-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-start mb-2">
-                    <div class="bg rounded-3 d-flex align-items-center justify-content-center me-3" style="width:54px;height:54px;border-radius:10px;">
-                        <strong class="text-inisial">KT</strong>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h5 class="card-title mb-0">Toko Kreatif</h5>
-                        <div class="text-muted small">Tasikmalaya • 1.2k penjualan</div>
-                    </div>
-                    </div>
-        
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="stars me-2">★★★★★</div>
-                        <small class="text-muted">4.9 (2.3k)</small>
-                    </div>
-        
-                    <div class="d-flex align-items-center justify-content-between">
-                    <small class="text-muted">
-                        <i class="bi bi-person-fill"></i> Haji Nawi
-                    </small>
-                    <a href="/toko" class="btn btn-dark">Kunjungi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-start mb-2">
-                    <div class="bg rounded-3 d-flex align-items-center justify-content-center me-3" style="width:54px;height:54px;border-radius:10px;">
-                        <strong class="text-inisial">TK</strong>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h5 class="card-title mb-0">Tokoku</h5>
-                        <div class="text-muted small">Tasikmalaya • 1.2k penjualan</div>
-                    </div>
-                    </div>
-        
-                    <div class="d-flex align-items-center mb-2">
-                    <div class="stars me-2">★★★★★</div>
-                    <small class="text-muted">4.9 (2.3k)</small>
-                    </div>
-        
-                    <div class="d-flex align-items-center justify-content-between">
-                    <small class="text-muted">
-                        <i class="bi bi-person-fill"></i> Jack
-                    </small>
-                    <a href="#" class="btn btn-dark">Kunjungi</a>
+        @foreach ($stores as $item)
+            <div class="col-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start mb-2">
+                            <div class="bg rounded-3 d-flex align-items-center justify-content-center me-3" style="width:54px;height:54px;border-radius:10px;">
+                                {{-- <strong class="text-inisial">KT</strong> --}}
+                                <img src="{{ asset('storage/gambar-toko/' . $item->gambar) }}" style="object-fit: cover;" width="50" height="50" alt="">
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="card-title mb-0">{{$item->nama_toko}}</h5>
+                                <small>
+                                    <i class="bi bi-geo-alt-fill me-1 text-dark"></i>
+                                    {{$item->alamat}}
+                                </small>
+                            </div>
+                        </div>
+            
+                        <div class="d-flex align-items-center mt-3">
+                            <small class="text-muted">
+                                <i class="fa-brands fa-whatsapp text-dark me-2"></i>
+                                {{$item->kontak_toko}}
+                            </small>
+                        </div>
+                        
+                        <div class="d-flex align-items-center justify-content-between">
+                            <small class="text-muted">
+                                <i class="fa-solid fa-user text-dark me-2"></i>
+                                {{$item->user->name}}
+                            </small>
+                            <a href="{{route('toko.detail',Crypt::encrypt($item->id))}}" class="btn btn-dark">Kunjungi</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-start mb-2">
-                    <div class="bg rounded-3 d-flex align-items-center justify-content-center me-3" style="width:54px; height:54px; border-radius:10px;">
-                        <strong class="text-inisial">TB</strong>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h5 class="card-title mb-0">Toko Buku</h5>
-                        <div class="text-muted small">Tasikmalaya • 1.2k penjualan</div>
-                    </div>
-                    </div>
-        
-                    <div class="d-flex align-items-center mb-2">
-                    <div class="stars me-2">★★★★★</div>
-                    <small class="text-muted">4.9 (2.3k)</small>
-                    </div>
-        
-                    <div class="d-flex align-items-center justify-content-between">
-                    <small class="text-muted">
-                        <i class="bi bi-person-fill"></i> Abeem
-                    </small>
-                    <a href="#" class="btn btn-dark">Kunjungi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 <section class="container mt-5">
@@ -134,14 +91,4 @@
         </div>
     </div>
 </section>
-<!-- <section class="container py-5 text-center">
-    <div class="p-5 text-white rounded-4"
-        style="background: 
-                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                url({{ asset('asset/image/SkoolaAssets/1.jpg') }}) center/cover no-repeat;">
-        <h3 class="fw-semibold mb-2">Gabung bersama Skoola!</h3>
-        <p class="mb-4">Buka tokomu dan mulai berjualan kebutuhan pendidikan dengan mudah.</p>
-        <a href="/daftar" class="btn btn-daftar fw-semibold px-4">Daftar Sekarang</a>
-    </div>
-</section> -->
 @endsection

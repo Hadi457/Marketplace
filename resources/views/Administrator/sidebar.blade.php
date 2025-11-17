@@ -30,6 +30,9 @@
         <div class="sidebar">
             <div class="sidebar-content">
                 <h2 class="logo p-3" href="/">Skoola</h2>
+                @if (Auth::check())
+                    <p>Hi, {{Auth::user()->name}}</p>
+                @endif
                 <hr>
                 <a href="/admin/dashboard" class="nav-link active">
                     <i class="bi bi-speedometer me-2"></i> Dashboard
@@ -43,7 +46,7 @@
             </div>
             <div class="logout-btn p-4">
                 <hr>
-                <a href="/logout"><i class="bi bi-box-arrow-right me-2"></i>keluar</a>
+                <a href="/logout">keluar<i class="bi bi-box-arrow-right ms-2"></i></a>
             </div>
         </div>
 

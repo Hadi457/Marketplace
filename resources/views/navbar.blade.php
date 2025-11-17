@@ -62,7 +62,7 @@
                             <i class="bi bi-person-circle fs-3 ms-3"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="/toko/create">Buat Toko</a></li>
+                            <li><a href="/toko/toko-member" class="dropdown-item">Toko</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
@@ -76,7 +76,7 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid m-0 p-0">
+    <div class="container-fluid m-0 p-0 min-vh-100">
         @yield('content')
     </div>
     <footer class="mt-5 border-top py-4">

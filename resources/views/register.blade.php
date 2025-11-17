@@ -36,6 +36,13 @@
             <h3 class="text-center mb-3">Daftar</h3>
 
             <form action="{{route('register.post')}}" method="POST" novalidate>
+                @if (Session::get('pesan'))
+                    <div class="alert alert-success alert-dismissible fade show mb-1 mt-2" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {{ Session::get('pesan') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>  
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="mb-0">

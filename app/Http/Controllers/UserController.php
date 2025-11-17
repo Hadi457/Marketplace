@@ -29,6 +29,31 @@ class UserController extends Controller
 
         return redirect()->route('user')->with('pesan', 'User baru berhasil ditambahkan.');
     }
+    public function Update(string $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = request()->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'kontak' => 'required|string|max:15',
+            'role' => 'required|in:admin,member',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        // Jika password diisi, update passwordnya
+        if (!empty($validated['password'])) {
+            $validated['password'] = bcrypt($validated['password']);
+        } else {
+            // Jika tidak diisi, jangan update password
+            unset($validated['password']);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('user')->with('pesan', 'User berhasil diperbarui.');
+    }
+
     public function decrypId($id){
         try {
             return Crypt::decrypt($id);

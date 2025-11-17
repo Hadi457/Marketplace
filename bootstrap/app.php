@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AuthenticationAdmin;
 use App\Http\Middleware\AuthenticationMember;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('member',[AuthenticationMember::class]);
+        $middleware->appendToGroup('admin',[AuthenticationAdmin::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
