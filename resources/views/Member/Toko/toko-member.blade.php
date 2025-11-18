@@ -115,25 +115,50 @@
         </div>
         <!-- Daftar Produk -->
         <div>
-            <h5 class="fw-semibold mb-3">Produk dari {{ $toko->name }}</h5>
-            <div class="row g-4">
-                {{-- Produk --}}
-                <div class="col-6 col-md-3">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="{{asset('asset/image/SkoolaAssets/2.jpg')}}" class="card-img-top" alt="Pulpen Gel Hitam">
-                        <div class="card-body">
-                            <h6 class="card-title mb-1">Pulpen Gel Hitam</h6>
-                            <p class="text-muted small mb-2">{{ $toko->name }}</p>
-                            <strong class="text-dark">Rp5.000</strong>
-                        </div>
-                        <div class="d-flex p-2">
-                            <a class="btn btn-primary w-100">
-                                <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex">
+                <h5 class="fw-semibold me-auto">Produk dari {{ $toko->nama_toko }}</h5>
+                <a href="#" class="btn btn-primary" >Tambah Produk</a>
             </div>
+            <table id="example" class="table table-striped nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nama Toko</th>
+                <th>Deskripsi</th>
+                <th>Gambar</th>
+                <th>Kontak Toko</th>
+                <th>Alamat</th>
+                <th>Pemilik</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{-- @foreach ( $stores as $item )
+                <tr>
+                    <td>{{ $item->nama_toko }}</td>
+                    <td>{{ $item->deskripsi }}</td>
+                    <td>
+                        <img src="{{ asset('storage/gambar-toko/' . $item->gambar) }}" width="100" height="100" alt="">
+                    </td>
+                    <td>{{ $item->kontak_toko }}</td>
+                    <td>{{ $item->alamat }}</td>
+                    <td>{{ $item->user->name }}</td>
+                    <td>
+                        <a data-bs-toggle="modal" data-bs-target="#editToko{{ $item->id }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{route('toko.admin.delete',Crypt::encrypt($item->id))}}" class="btn btn-sm btn-warning"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            @endforeach --}}
+                <tr>
+                    <td>a</td>
+                    <td>a</td>
+                    <td>a</td>
+                    <td>a</td>
+                    <td>a</td>
+                    <td>a</td>
+                    <td>a</td>
+                </tr>
+        </tbody>
+    </table>
         </div>
     @endif
 </div>

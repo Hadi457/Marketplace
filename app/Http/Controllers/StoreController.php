@@ -108,8 +108,8 @@ class StoreController extends Controller
     {
         $id = $this->decrypId($id);
         $toko = Store::findOrFail($id);
-        if(Storage::exists('public/gambar-foto/'.$toko->file)){
-            Storage::delete('public/gambar-foto/'.$toko->file);
+        if(Storage::exists('public/gambar-foto/'.$toko->gambar)){
+            Storage::delete('public/gambar-foto/'.$toko->gambar);
         }
         $toko->delete();
         return redirect()->back()->with('sukses','Toko berhasil dihapus.');

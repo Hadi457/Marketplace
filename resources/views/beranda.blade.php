@@ -81,8 +81,10 @@
                     <strong class="text-dark">Rp5.000</strong>
                 </div>
                 <div class="d-flex p-2">
-                    <a class="btn btn-primary w-100">
+                    <a class="btn btn-primary w-100 me-2">
                         <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
+                    </a>
+                    <a href="/produk/detail" class="btn btn-outline">Detail
                     </a>
                 </div>
             </div>

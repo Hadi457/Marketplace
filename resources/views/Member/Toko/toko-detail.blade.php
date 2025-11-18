@@ -88,7 +88,7 @@
     </div>
     <!-- Daftar Produk -->
     <div>
-        <h5 class="fw-semibold mb-3">Produk dari Toko Kreatif</h5>
+        <h5 class="fw-semibold mb-3">Produk dari {{ $store->nama_toko }}</h5>
         <div class="row g-4">
             <!-- Produk -->
             <div class="col-6 col-md-3">
