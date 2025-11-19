@@ -43,8 +43,11 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['member'])->group(function () {
     Route::get('/toko/toko-member', [StoreController::class, 'TokoMember'])->name('toko.member');
     Route::post('/toko/create', [StoreController::class, 'TokoMemberCreate'])->name('toko.member.store');
+    Route::post('/toko/update/{id}', [StoreController::class, 'TokoMemberUpdate'])->name('toko.member.update');
     Route::post('/produk/create', [ProductController::class, 'Store'])->name('produk.store');
     Route::get('/produk/create', [ProductController::class, 'Create'])->name('produk.create');
+    Route::get('/produk/delete/{id}', [ProductController::class, 'Delete'])->name('produk.delete');
+    Route::post('/produk/update/{id}', [ProductController::class, 'Update'])->name('produk.update');
 });
 
 // Authentication Route

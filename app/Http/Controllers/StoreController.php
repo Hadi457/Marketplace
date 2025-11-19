@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\User;
@@ -21,17 +22,95 @@ class StoreController extends Controller
         }
     }
 
-    public function TokoMember()
-    {
-        // ambil toko milik user (bisa null)
-        $toko = Store::where('users_id', Auth::id())->first();
-
-        // ambil produk hanya jika toko ada, kalau nggak ada beri collection kosong
-        $products = $toko ? Product::where('stores_id', $toko->id)->get() : collect();
-
-        // selalu kirim variabel 'toko' dan 'products' ke view
-        return view('Member.Toko.toko-member', ['toko' => $toko,'products' => $products,]);
+    public function Index(){
+        $data['stores'] = Store::with('user')->get();
+        return view('toko', $data);
     }
+
+    // public function TokoMember($id = null)
+    // {
+    //     if ($id) {
+    //         $id = $this->decrypId($id);
+    //         $data['products'] = Product::findOrFail($id);
+    //     }
+
+    //     $data['categories'] = Category::all();
+    //     // Ambil toko milik user login
+    //     $data['store'] = Store::where('users_id', Auth::id())->first();
+    //     if (!$data['store']) {
+    //         return redirect()->back()->with('error', 'Anda belum memiliki toko.');
+    //     }
+    //     // ambil toko milik user (bisa null)
+    //     $toko = Store::where('users_id', Auth::id())->first();
+    //     // ambil produk hanya jika toko ada, kalau nggak ada beri collection kosong
+    //     $products = $toko ? Product::where('stores_id', $toko->id)->get() : collect();
+
+    //     // selalu kirim variabel 'toko' dan 'products' ke view
+    //     return view('Member.Toko.toko-member', $data, ['toko' => $toko,'products' => $products,]);
+    // }
+    // public function TokoMember($id = null)
+    // {
+    //     if ($id) {
+    //         $id = $this->decrypId($id);
+    //         $data['products'] = Product::findOrFail($id);
+    //     }
+
+    //     $data['categories'] = Category::all();
+
+    //     // semua toko milik user
+    //     $stores = Store::where('users_id', Auth::id())->get();
+
+    //     if ($stores->isEmpty()) {
+    //         // user belum punya toko
+    //         $data['toko']     = null;
+    //         $data['products'] = collect(); // atau []
+    //     } else {
+    //         // user punya minimal 1 toko
+    //         $toko = $stores->first(); // ambil toko pertama
+    //         $data['toko']     = $toko;
+    //         // $data['products'] = Product::where('stores_id', $toko->id)->get();
+    //         $data['products'] = Product::where('stores_id', $stores->first()->id)->get();
+
+    //     }
+
+    //     // ambil produk untuk toko pertama misalnya
+
+    //     return view('Member.Toko.toko-member', [
+    //         'categories' => $data['categories'],
+    //         'stores'     => $stores,
+    //         $data
+    //     ]);
+    // }
+
+    public function TokoMember($id = null)
+    {
+        if ($id) {
+            $id = $this->decrypId($id);
+            $data['products'] = Product::findOrFail($id);
+            $data['stores']   = Store::findOrFail($id);
+        }
+
+        $data['categories'] = Category::all();
+
+        // semua toko milik user
+        $stores = Store::where('users_id', Auth::id())->get();
+        $data['stores'] = $stores;
+
+        if ($stores->isEmpty()) {
+            // user belum punya toko
+            $data['toko']     = null;
+            $data['products'] = collect();   // atau []
+        } else {
+            // user punya minimal 1 toko
+            $toko = $stores->first();        // ambil toko pertama
+            $data['toko']     = $toko;
+            $data['products'] = Product::where('stores_id', $toko->id)->get();
+        }
+
+        // cukup kirim $data saja
+        return view('Member.Toko.toko-member', $data);
+    }
+
 
     public function TokoMemberCreate(Request $request)
     {
@@ -61,6 +140,32 @@ class StoreController extends Controller
         return redirect()->route('toko.member')->with('pesan', 'Toko berhasil dibuat.');
     }
 
+    public function TokoMemberUpdate(Request $request, String $id)
+    {
+
+        $validate = $request->validate([
+            'nama_toko' => 'required|string|max:255',
+            'deskripsi' => 'required|string|max:1000',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'alamat' => 'required|string|max:500',
+            'kontak_toko' => 'required|string|max:15',
+        ]);
+
+        $toko = Store::findOrFail($id);
+        if($request->hasFile('gambar')){
+            if(Storage::exists('public/gambar-toko/'.$toko->gambar)){
+                Storage::delete('public/gambar-toko/' . $toko->gambar);
+            }
+            $image = $request->file('gambar');
+            $filename = time(). "-" . $request->judul . "." . $image->getClientOriginalExtension();
+            $image->storeAs('public/gambar-toko', $filename);
+            $validate['gambar'] = $filename;
+        }
+
+        $toko->update($validate);
+        return redirect()->route('toko.member')->with('sukses','Berhasil mengubah toko');
+    }
+
     public function Store(Request $request){
         $data['user'] = User::all();
         $validate = $request->validate([
@@ -87,7 +192,8 @@ class StoreController extends Controller
     }
 
 
-    public function Update(Request $request, String $id){
+    public function Update(Request $request, String $id)
+    {
         $id = $this->decrypId($id);
 
         $validate = $request->validate([

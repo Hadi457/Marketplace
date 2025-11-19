@@ -10,6 +10,9 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+
+use function Symfony\Component\Clock\now;
 
 class ProductController extends Controller
 {
@@ -22,7 +25,9 @@ class ProductController extends Controller
     }
 
     public function Index(){
-        return view('produk');
+        // $data['products'] = Product::with(['imageProducts', 'store'])->get();
+        $data['category'] = Category::with(['products.imageProducts'])->get();
+        return view('produk', $data);
     }
 
     public function Create()
@@ -48,7 +53,7 @@ class ProductController extends Controller
             'harga' => 'required|integer',
             'stok' => 'required|integer',
             'deskripsi' => 'required|string',
-            'tanggal_upload' => 'required|date',
+            'tanggal_upload' => 'nullable|date',
             'gambar.*' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
@@ -59,7 +64,7 @@ class ProductController extends Controller
             'harga' => $request->harga,
             'stok' => $request->stok,
             'deskripsi' => $request->deskripsi,
-            'tanggal_upload' => $request->tanggal_upload,
+            'tanggal_upload' => now(),
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -77,6 +82,72 @@ class ProductController extends Controller
         return redirect()->back()->with('pesan', 'Produk berhasil ditambahkan!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'categories_id' => 'required|exists:categories,id',
+            'stores_id' => 'required|exists:stores,id',
+            'nama_produk' => 'required|string|max:100',
+            'harga' => 'required|integer',
+            'stok' => 'required|integer',
+            'deskripsi' => 'required|string',
+            'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Update data produk
+        $product->update([
+            'categories_id' => $request->categories_id,
+            'stores_id' => $request->stores_id,
+            'nama_produk' => $request->nama_produk,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'deskripsi' => $request->deskripsi,
+            'tanggal_upload' => $product->tanggal_upload, // tetap
+        ]);
+
+        // Jika user upload gambar baru
+        if ($request->hasFile('gambar')) {
+
+            // === Jika ingin menghapus semua gambar lama (opsional) ===
+            // foreach ($product->imageProducts as $oldImg) {
+            //     Storage::delete('public/gambar-produk/'.$oldImg->nama_gambar);
+            //     $oldImg->delete();
+            // }
+
+            foreach ($request->file('gambar') as $img) {
+                $filename = time() . '_' . uniqid() . '.' . $img->getClientOriginalExtension();
+                $img->storeAs('public/gambar-produk', $filename);
+
+                ImageProduct::create([
+                    'products_id' => $product->id,
+                    'nama_gambar' => $filename,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('pesan', 'Produk berhasil diupdate!');
+    }
+
+
+    public function Delete($id){
+        $id = $this->decrypId($id);
+        $product = Product::findOrFail($id);
+
+        // Hapus gambar terkait
+        foreach ($product->imageProducts as $image) {
+            // Hapus file gambarnya dari storage
+            Storage::delete('public/gambar-produk/' . $image->nama_gambar);
+            // Hapus record gambarnya dari database
+            $image->delete();
+        }
+
+        // Hapus produk
+        $product->delete();
+
+        return redirect()->back()->with('pesan', 'Produk berhasil dihapus!');
+    }
 
     public function Detail($id){
         $id = $this->decrypId($id);

@@ -19,7 +19,7 @@
             </p>
         </div>
         <div class="align-self-center">
-            <a href="#" class="btn btn-lihat">Lihat Semua</a>
+            <a href="/toko" class="btn btn-lihat">Lihat Semua</a>
         </div>
     </div>
     <!-- Card -->
@@ -67,33 +67,16 @@
             <p class="text-muted mb-0">Temukan berbagai kebutuhan sekolah terbaru di Skoola.</p>
         </div>
         <div class="align-self-center">
-            <a href="#" class="btn btn-lihat">Lihat Semua</a>
+            <a href="/produk" class="btn btn-lihat">Lihat Semua</a>
         </div>
     </div>
     <div class="row g-3">
-        <!-- Produk -->
-        {{-- <div class="col-6 col-md-3">
-            <div class="card h-100 shadow-sm border-0">
-                <img src="{{asset('asset/image/SkoolaAssets/2.jpg')}}" class="card-img-top" alt="Pulpen Gel Hitam">
-                <div class="card-body">
-                    <h6 class="card-title mb-1">Pulpen Gel Hitam</h6>
-                    <p class="text-muted small mb-2">Toko Kreatif</p>
-                    <strong class="text-dark">Rp5.000</strong>
-                </div>
-                <div class="d-flex p-2">
-                    <a class="btn btn-primary w-100 me-2">
-                        <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
-                    </a>
-                    <a href="/produk/detail" class="btn btn-outline">Detail
-                    </a>
-                </div>
-            </div>
-        </div> --}}
         @foreach($products as $p)
-
             <div class="col-6 col-md-3">
                 <div class="card h-100 shadow-sm border-0">
-                    <img src="{{$p->imageProducts->first() ? asset('storage/gambar-produk/' . $p->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/no-image.png')}}" class="card-img-top" alt="{{ $p->nama_produk }}" style="object-fit:cover; height:200px;">
+                    <a href="{{route('produk.detail',Crypt::encrypt($p->id))}}" class="nav-link">
+                        <img src="{{$p->imageProducts->first() ? asset('storage/gambar-produk/' . $p->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/no-image.png')}}" class="card-img-top" alt="{{ $p->nama_produk }}" style="object-fit:cover; height:200px;">
+                    </a>
                     <div class="card-body">
                         <h6 class="card-title mb-1">{{ $p->nama_produk }}</h6>
                         <p class="text-muted small mb-2">Stok : {{ $p->stok }}</p>
@@ -103,13 +86,10 @@
                         <a class="btn btn-primary w-100 me-2">
                             <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
                         </a>
-                        <a href="{{route('produk.detail',CRypt::encrypt($p->id))}}" class="btn btn-outline">Detail
-                        </a>
                     </div>
                 </div>
             </div>
         @endforeach
-
     </div>
 </section>
 @endsection

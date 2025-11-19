@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
+    
     public function decrypId($id){
         try {
             return Crypt::decrypt($id);
@@ -26,7 +27,7 @@ class AdminController extends Controller
         $data['produk'] = Product::all();
         return view('Administrator.dashboard', $data);
     }
-
+    
     public function Beranda(){
         $data['products'] = Product::with(['imageProducts', 'store'])->latest()->get();
         $data['stores'] = Store::all();

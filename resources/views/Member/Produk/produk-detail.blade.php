@@ -82,7 +82,7 @@
 
         <!-- Kolom Gambar -->
         <div class="col-lg-6 mb-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
 
                     <div class="mb-3 text-center">
@@ -110,7 +110,7 @@
 
         <!-- Kolom Detail Produk -->
         <div class="col-lg-6 mb-4">
-            <div class="card shadow-sm h-100">
+            <div class="card shadow-sm h-100 border-0">
                 <div class="card-body d-flex flex-column">
 
                     <h3 class="mb-2">{{ $product->nama_produk }}</h3>
@@ -137,7 +137,7 @@
                             <i class="bi bi-whatsapp me-2"></i> Chat Penjual
                         </a>
 
-                        <a href="{{ route('toko.member', $product->store->id ?? 0) }}" class="btn btn-primary ms-auto">Lihat Toko</a>
+                        <a href="{{ route('toko.detail', Crypt::encrypt($product->store->id)) }}" class="btn btn-primary ms-auto">Lihat Toko</a>
                     </div>
 
                 </div>
