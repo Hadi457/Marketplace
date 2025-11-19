@@ -90,22 +90,13 @@
             </div>
         </div> --}}
         @foreach($products as $p)
-            @php
-                // ambil gambar pertama jika ada
-                $firstImg = $p->imageProducts->first();
-                // ganti path sesuai lokasi penyimpanan file-mu:
-                // contoh: 'storage/products/' untuk storage:link atau 'uploads/' jika di public/uploads
-                $imgPath = $firstImg ? asset('storage/gambar-toko/' . $firstImg->nama_gambar) : asset('asset/image/SkoolaAssets/2.jpg');
-                // nama toko, kalau relasi store ada:
-                $storeName = $p->store->nama_toko ?? 'Toko';
-            @endphp
 
             <div class="col-6 col-md-3">
                 <div class="card h-100 shadow-sm border-0">
-                    <img src="{{ $imgPath }}" class="card-img-top" alt="{{ $p->nama_produk }}" style="object-fit:cover; height:200px;">
+                    <img src="{{$p->imageProducts->first() ? asset('storage/gambar-produk/' . $p->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/no-image.png')}}" class="card-img-top" alt="{{ $p->nama_produk }}" style="object-fit:cover; height:200px;">
                     <div class="card-body">
                         <h6 class="card-title mb-1">{{ $p->nama_produk }}</h6>
-                        <p class="text-muted small mb-2">{{ $storeName }}</p>
+                        <p class="text-muted small mb-2">Stok : {{ $p->stok }}</p>
                         <strong class="text-dark">Rp {{ number_format($p->harga, 0, ',', '.') }}</strong>
                     </div>
                     <div class="d-flex p-2">

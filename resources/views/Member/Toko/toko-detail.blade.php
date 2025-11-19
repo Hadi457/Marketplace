@@ -106,7 +106,7 @@
 
                     <div class="card-body">
                         <h6 class="card-title mb-1">{{ $p->nama_produk }}</h6>
-                        <p class="text-muted small mb-2">{{ $p->store->nama_toko }}</p>
+                        <p class="text-muted small mb-2">Stok : {{ $p->stok }}</p>
                         <strong class="text-dark">Rp{{ number_format($p->harga, 0, ',', '.') }}</strong>
                     </div>
 

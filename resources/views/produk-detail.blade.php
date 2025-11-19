@@ -86,19 +86,19 @@
                 <div class="card-body">
 
                     <div class="mb-3 text-center">
-                        <img id="mainImage" src="{{$product->imageProducts->first() ? asset('storage/gambar-toko/' . $product->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/1.jpg')}}"
+                        <img id="mainImage" src="{{$product->imageProducts->first() ? asset('storage/gambar-produk/' . $product->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/no-image.png')}}"
                              class="img-fluid rounded"
                              style="width:100%; max-height:520px; object-fit:cover;">
                     </div>
 
                     <!-- Thumbnail -->
                     <div class="row g-2">
-                        @foreach ($product->imageProducts as $img)
+                        @foreach ($product->imageProducts->skip(1) as $img)
                             <div class="col-3">
-                                <img src="{{ asset('storage/gambar-toko/' . $img->nama_gambar) }}"
+                                <img src="{{ asset('storage/gambar-produk/' . $img->nama_gambar) }}"
                                      class="img-fluid rounded thumb-img"
                                      style="height:80px; width:100%; object-fit:cover; cursor:pointer;"
-                                     data-src="{{ asset('storage/products/' . $img->nama_gambar) }}"
+                                     data-src="{{ asset('storage/gambar-produk/' . $img->nama_gambar) }}"
                                      alt="thumb">
                             </div>
                         @endforeach

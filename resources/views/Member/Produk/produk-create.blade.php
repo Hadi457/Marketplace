@@ -46,7 +46,7 @@
     <input type="date" name="tanggal_upload" class="form-control" required>
 
     <label>Upload Gambar (Bisa Banyak)</label>
-    <input type="file" name="nama[]" class="form-control" multiple required>
+    <input type="file" name="gambar[]" class="form-control" multiple required>
 
     <br>
     <button type="submit" class="btn btn-primary">Tambah Produk</button>
