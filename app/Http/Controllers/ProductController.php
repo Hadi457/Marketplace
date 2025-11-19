@@ -81,6 +81,6 @@ class ProductController extends Controller
     public function Detail($id){
         $id = $this->decrypId($id);
         $data['product'] = Product::with(['imageProducts', 'category', 'store'])->findOrFail($id);
-        return view('produk-detail', $data);
+        return view('Member.Produk.produk-detail', $data);
     }
 }
