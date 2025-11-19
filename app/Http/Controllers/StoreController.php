@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -20,12 +21,20 @@ class StoreController extends Controller
         }
     }
 
-    public function TokoMember(){
-        $data['toko'] = Store::where('users_id', Auth::id())->first();
-        return view('Member.Toko.toko-member', $data);
+    public function TokoMember()
+    {
+        // ambil toko milik user (bisa null)
+        $toko = Store::where('users_id', Auth::id())->first();
+
+        // ambil produk hanya jika toko ada, kalau nggak ada beri collection kosong
+        $products = $toko ? Product::where('stores_id', $toko->id)->get() : collect();
+
+        // selalu kirim variabel 'toko' dan 'products' ke view
+        return view('Member.Toko.toko-member', ['toko' => $toko,'products' => $products,]);
     }
 
-    public function TokoMemberCreate(Request $request){
+    public function TokoMemberCreate(Request $request)
+    {
         $validate = $request->validate([
             'nama_toko' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:1000',
@@ -117,7 +126,11 @@ class StoreController extends Controller
 
     public function Detail(String $id){
         $id = $this->decrypId($id);
-        $data['store'] = Store::findOrFail($id);
+        $data['store'] = Store::with('user')->findOrFail($id);
+
+        // ambil produk hanya milik toko ini + eager load gambar
+        // GANTI 'imageProducts' => kalau di Product model kamu namakan relasi 'images', ubah jadi 'images'
+        $data['products'] = $data['store']->products()->with(['imageProducts'])->get();
         return view('Member.Toko.toko-detail', $data);
     }
 }

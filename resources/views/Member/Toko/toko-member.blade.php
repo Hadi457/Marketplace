@@ -103,7 +103,7 @@
                 <div class="ms-md-auto">
                     <a href="https://wa.me/{{ $toko->kontak_toko }}" target="_blank"
                     style="background-color: #020202ff;" class="btn btn-success">
-                        <i class="bi bi-whatsapp me-1" style="color: #16DB65"></i> Hubungi via WhatsApp
+                        Edit Toko
                     </a>
                 </div>
             </div>
@@ -117,46 +117,33 @@
         <div>
             <div class="d-flex">
                 <h5 class="fw-semibold me-auto">Produk dari {{ $toko->nama_toko }}</h5>
-                <a href="#" class="btn btn-primary" >Tambah Produk</a>
+                <a href="{{route('produk.create')}}" class="btn btn-primary" >Tambah Produk</a>
             </div>
             <table id="example" class="table table-striped nowrap" style="width:100%">
         <thead>
             <tr>
-                <th>Nama Toko</th>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Stok</th>
                 <th>Deskripsi</th>
-                <th>Gambar</th>
-                <th>Kontak Toko</th>
-                <th>Alamat</th>
-                <th>Pemilik</th>
+                <th>Tanggal Upload</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ( $stores as $item )
-                <tr>
-                    <td>{{ $item->nama_toko }}</td>
-                    <td>{{ $item->deskripsi }}</td>
-                    <td>
-                        <img src="{{ asset('storage/gambar-toko/' . $item->gambar) }}" width="100" height="100" alt="">
-                    </td>
-                    <td>{{ $item->kontak_toko }}</td>
-                    <td>{{ $item->alamat }}</td>
-                    <td>{{ $item->user->name }}</td>
-                    <td>
-                        <a data-bs-toggle="modal" data-bs-target="#editToko{{ $item->id }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{route('toko.admin.delete',Crypt::encrypt($item->id))}}" class="btn btn-sm btn-warning"><i class="bi bi-trash-fill"></i></a>
-                    </td>
-                </tr>
-            @endforeach --}}
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                </tr>
+            @foreach($products as $p)
+            <tr>
+                <td>{{ $p->nama_produk }}</td>
+                <td>{{ number_format($p->harga) }}</td>
+                <td>{{ $p->stok }}</td>
+                <td>{{ $p->deskripsi }}</td>
+                <td>{{ \Carbon\Carbon::parse($p->tanggal_upload)->format('d F Y') }}</td>
+
+                <td>
+                    hapus
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
         </div>

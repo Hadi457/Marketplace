@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AdminController::class, 'Beranda'])->name('beranda');
 Route::get('/about', [AboutController::class, 'Index'])->name('about');
 Route::get('/produk', [ProductController::class, 'Index'])->name('produk');
-Route::get('/produk/detail', [ProductController::class, 'Detail'])->name('produk.detail');
+Route::get('/produk/detail/{id}', [ProductController::class, 'Detail'])->name('produk.detail');
 Route::get('/toko/detail/{id}', [StoreController::class, 'Detail'])->name('toko.detail');
 Route::get('/toko', [StoreController::class, 'Index'])->name('toko');
 
@@ -43,7 +43,8 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['member'])->group(function () {
     Route::get('/toko/toko-member', [StoreController::class, 'TokoMember'])->name('toko.member');
     Route::post('/toko/create', [StoreController::class, 'TokoMemberCreate'])->name('toko.member.store');
-    Route::get('/produk/create', [ProductController::class, 'Store'])->name('produk.store');
+    Route::post('/produk/create', [ProductController::class, 'Store'])->name('produk.store');
+    Route::get('/produk/create', [ProductController::class, 'Create'])->name('produk.create');
 });
 
 // Authentication Route

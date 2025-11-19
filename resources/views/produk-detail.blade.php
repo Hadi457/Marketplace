@@ -1,82 +1,163 @@
 @extends('navbar')
 @section('content')
 <link rel="stylesheet" href="{{asset('style/produk-detail.css')}}">
-<div class="container my-5">
+
+{{-- <div class="container py-4">
+
     <div class="row">
-        <!-- Gambar Produk -->
-        <div class="col-md-6">
+
+        <!-- Kolom Gambar -->
+        <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+            <!-- Gambar utama -->
             <div class="mb-3">
-                <img id="main-image" src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" alt="Samsung Galaxy S23 Ultra" class="product-image rounded">
+                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}"
+                    class="img-fluid rounded"
+                    style="width:100%; object-fit:cover;">
             </div>
-            <div class="d-flex gap-2">
-                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" alt="Gambar 1" class="thumbnail active" onclick="changeImage(this)">
-                <img src="{{asset('asset/image/SkoolaAssets/2.jpg')}}" alt="Gambar 2" class="thumbnail" onclick="changeImage(this)">
-                <img src="{{asset('asset/image/SkoolaAssets/4.jpg')}}" alt="Gambar 3" class="thumbnail" onclick="changeImage(this)">
-                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" alt="Gambar 4" class="thumbnail" onclick="changeImage(this)">
+
+            <!-- Thumbnail -->
+            <div class="row g-2">
+                <div class="col-3 thumb">
+                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" class="img-fluid rounded">
+                </div>
+                <div class="col-3 thumb">
+                <img src="{{asset('asset/image/SkoolaAssets/2.jpg')}}" class="img-fluid rounded">
+                </div>
+                <div class="col-3 thumb">
+                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" class="img-fluid rounded">
+                </div>
+                <div class="col-3 thumb">
+                <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" class="img-fluid rounded">
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div>
+
+        <!-- Kolom Detail Produk -->
+        <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+
+            <h3 class="mb-2">Nama Produk Dummy</h3>
+
+            <div class="mb-3">
+                <span class="price h4">Rp 150.000</span>
+                <span class="badge badge-stock ms-2">Stok: 12</span>
+            </div>
+
+            <p class="text-muted mb-3">
+                Ini adalah deskripsi dummy untuk produk.
+                Jelaskan fitur, bahan, ukuran, atau informasi lain mengenai produk.
+            </p>
+
+            <ul class="list-unstyled small text-muted mb-3">
+                <li><strong>Kategori:</strong> Elektronik</li>
+                <li><strong>Toko:</strong> Toko Sumber Jaya</li>
+                <li><strong>Tanggal Upload:</strong> 19 November 2025</li>
+                <li><strong>Dibuat:</strong> 2 hari yang lalu</li>
+            </ul>
+
+            <div class="mt-auto d-flex gap-2">
+                <button class="btn btn-outline-custom">
+                    <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i>
+                    Chat Penjual
+                </button>
+                <button class="btn btn-primary-custom ms-auto">Lihat Toko</button>
+            </div>
+
             </div>
         </div>
 
-        <!-- Informasi Produk -->
-        <div class="col-md-6">
-            <h1 class="h3">Samsung Galaxy S23 Ultra 256GB Phantom Black</h1>
-
-            <!-- Harga -->
-            <div class="mb-3">
-                <h2 class="price h4">Rp 15.999.000</h2>
-            </div>
-
-            <!-- Stok -->
-            <div class="mb-3">
-                <span class="text-muted">Stok: 45</span>
-            </div>
-
-            <!-- Deskripsi Singkat -->
-            <div class="mb-4">
-                <h4 class="fw-bold">Deskripsi</h4>
-                <p>Samsung Galaxy S23 Ultra lorem50 dengan kamera 200MP, chipset Snapdragon 8 Gen 2, dan baterai 5000mAh. Dilengkapi dengan S-Pen untuk produktivitas maksimal.</p>
-            </div>
-
-            <!-- Tombol Aksi -->
-            <a href="/produk/detail" class="btn btn-primary w-100 mb-4">
-                <i class="bi bi-whatsapp me-2" style="color: #16DB65"></i> Chat Penjual
-            </a>
-
-            <!-- Info Toko -->
-            <div class="store-info mb-4">
-                <h5 class="mb-3">Informasi Toko</h5>
-                <div class="d-flex align-items-center mb-2">
-                    <img src="{{asset('asset/image/SkoolaAssets/1.jpg')}}" width="80" height="80" alt="Toko" class="rounded-circle me-2">
-                    <div class="ms-3">
-                        <h6 class="mb-0">Toko Elektronik Maju Jaya</h6>
-                        <small class="text-muted">Jakarta, Indonesia</small>
-                    </div>
-                </div>
-                <div class="d-flex gap-3 my-3">
-                    <div>
-                        <small class="text-muted">Produk</small>
-                        <div class="fw-bold">1.2K</div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Bergabung</small>
-                        <div class="fw-bold">Mar 2020</div>
-                    </div>
-                </div>
-                <button class="btn btn-outline btn-sm mt-2">Kunjungi Toko</button>
-            </div>
         </div>
     </div>
+</div> --}}
+<div class="container py-4">
+
+    <div class="row">
+
+        <!-- Kolom Gambar -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <div class="mb-3 text-center">
+                        <img id="mainImage" src="{{$product->imageProducts->first() ? asset('storage/gambar-toko/' . $product->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/1.jpg')}}"
+                             class="img-fluid rounded"
+                             style="width:100%; max-height:520px; object-fit:cover;">
+                    </div>
+
+                    <!-- Thumbnail -->
+                    <div class="row g-2">
+                        @foreach ($product->imageProducts as $img)
+                            <div class="col-3">
+                                <img src="{{ asset('storage/gambar-toko/' . $img->nama_gambar) }}"
+                                     class="img-fluid rounded thumb-img"
+                                     style="height:80px; width:100%; object-fit:cover; cursor:pointer;"
+                                     data-src="{{ asset('storage/products/' . $img->nama_gambar) }}"
+                                     alt="thumb">
+                            </div>
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Detail Produk -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column">
+
+                    <h3 class="mb-2">{{ $product->nama_produk }}</h3>
+
+                    <div class="mb-3">
+                        <span class="price h4">Rp {{ number_format($product->harga,0,',','.') }}</span>
+                        <span class="badge bg-secondary ms-2">Stok: {{ $product->stok }}</span>
+                    </div>
+
+                    <p class="text-muted mb-3">
+                        {!! nl2br(e($product->deskripsi)) !!}
+                    </p>
+
+                    <ul class="list-unstyled small text-muted mb-3">
+                        <li><strong>Kategori:</strong> {{ $product->category->nama_kategori ?? '—' }}</li>
+                        <li><strong>Toko:</strong> {{ $product->store->nama_toko ?? '—' }}</li>
+                        <li><strong>Tanggal Upload:</strong> {{ \Carbon\Carbon::parse($product->tanggal_upload)->format('d F Y') }}</li>
+                        <li><strong>Dibuat:</strong> {{ $product->created_at->diffForHumans() }}</li>
+                    </ul>
+
+                    <div class="mt-auto d-flex gap-2">
+                        {{-- ganti nomor dengan data kontak toko kalau ada --}}
+                        <a href="https://wa.me/{{ $product->store->kontak ?? '628000000000' }}" target="_blank" class="btn btn-outline-success">
+                            <i class="bi bi-whatsapp me-2"></i> Chat Penjual
+                        </a>
+
+                        <a href="{{ route('toko.member', $product->store->id ?? 0) }}" class="btn btn-primary ms-auto">Lihat Toko</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+{{-- Opsional: script kecil untuk klik thumbnail -> ganti main image --}}
+@push('scripts')
 <script>
-    function changeImage(element) {
-        // Update gambar utama
-        document.getElementById('main-image').src = element.src;
-        
-        // Update status aktif thumbnail
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        thumbnails.forEach(thumb => {
-            thumb.classList.remove('active');
-        });
-        element.classList.add('active');
+document.addEventListener('click', function(e){
+    const t = e.target;
+    if(t.classList.contains('thumb-img')){
+        const src = t.getAttribute('data-src');
+        const main = document.getElementById('mainImage');
+        if(main && src) main.src = src;
     }
+});
 </script>
+@endpush
 @endsection
