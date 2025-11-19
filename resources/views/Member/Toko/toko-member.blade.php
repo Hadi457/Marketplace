@@ -1,5 +1,6 @@
 @extends('navbar')
 @section('content')
+
 <!-- Modal Create Toko -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -120,33 +121,40 @@
                 <a href="{{route('produk.create')}}" class="btn btn-primary" >Tambah Produk</a>
             </div>
             <table id="example" class="table table-striped nowrap" style="width:100%">
-        <thead>
-            <tr>
-                <th>Nama Produk</th>
-                <th>Harga</th>
-                <th>Stok</th>
-                <th>Deskripsi</th>
-                <th>Tanggal Upload</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($products as $p)
-            <tr>
-                <td>{{ $p->nama_produk }}</td>
-                <td>{{ number_format($p->harga) }}</td>
-                <td>{{ $p->stok }}</td>
-                <td>{{ $p->deskripsi }}</td>
-                <td>{{ \Carbon\Carbon::parse($p->tanggal_upload)->format('d F Y') }}</td>
+                <thead>
+                    <tr>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Deskripsi</th>
+                        <th>Tanggal Upload</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($products as $p)
+                    <tr>
+                        <td>{{ $p->nama_produk }}</td>
+                        <td>{{ number_format($p->harga) }}</td>
+                        <td>{{ $p->stok }}</td>
+                        <td>{{ $p->deskripsi }}</td>
+                        <td>{{ \Carbon\Carbon::parse($p->tanggal_upload)->format('d F Y') }}</td>
 
-                <td>
-                    hapus
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+                        <td>
+                            hapus
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     @endif
 </div>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            responsive: true
+        });
+    });
+</script>
 @endsection
