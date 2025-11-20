@@ -78,7 +78,8 @@
                         <img src="{{$p->imageProducts->first() ? asset('storage/gambar-produk/' . $p->imageProducts->first()->nama_gambar) : asset('asset/image/SkoolaAssets/no-image.png')}}" class="card-img-top" alt="{{ $p->nama_produk }}" style="object-fit:cover; height:200px;">
                     </a>
                     <div class="card-body">
-                        <h6 class="card-title mb-1">{{ Str::limit($p->nama_produk, '50', '....') }}</h6>
+                        <h5 class="card-title mb-1">{{ Str::limit($p->nama_produk, '50', '....') }}</h5>
+                        
                         <p class="text-muted small mb-2">Stok : {{ $p->stok }}</p>
                         <strong class="text-dark">Rp {{ number_format($p->harga, 0, ',', '.') }}</strong>
                     </div>

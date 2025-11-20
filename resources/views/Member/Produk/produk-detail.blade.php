@@ -62,7 +62,7 @@
 
                     <div class="mt-auto d-flex gap-2">
                         {{-- ganti nomor dengan data kontak toko kalau ada --}}
-                        <a href="https://wa.me/{{ $product->store->kontak ?? '628000000000' }}" target="_blank" class="btn btn-outline-success">
+                        <a href="https://wa.me/{{ $product->store->kontak_toko }}?text=Halo%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama_produk) }}" target="_blank" class="btn btn-outline-success">
                             <i class="bi bi-whatsapp me-2"></i> Chat Penjual
                         </a>
 
