@@ -17,40 +17,28 @@
     </div>
 @endif
     <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-
-    <!-- Kirim otomatis stores_id -->
-    <input type="hidden" name="stores_id" value="{{ $store->id }}">
-
-    <label>Kategori Produk</label>
-    <select name="categories_id" class="form-control" required>
-        <option value="">-- Pilih Kategori --</option>
-        @foreach ($categories as $c)
-            <option value="{{ $c->id }}">{{ $c->nama_kategori }}</option>
-        @endforeach
-    </select>
-
-    <label>Nama Produk</label>
-    <input type="text" name="nama_produk" class="form-control" required>
-
-    <label>Harga</label>
-    <input type="number" name="harga" class="form-control" required>
-
-    <label>Stok</label>
-    <input type="number" name="stok" class="form-control" required>
-
-    <label>Deskripsi</label>
-    <textarea name="deskripsi" class="form-control" required></textarea>
-
-    <label>Tanggal Upload</label>
-    <input type="date" name="tanggal_upload" class="form-control" required>
-
-    <label>Upload Gambar (Bisa Banyak)</label>
-    <input type="file" name="gambar[]" class="form-control" multiple required>
-
-    <br>
-    <button type="submit" class="btn btn-primary">Tambah Produk</button>
-</form>
-
-
+        @csrf
+        <input type="hidden" name="stores_id" value="{{ $store->id }}">
+        <label>Kategori Produk</label>
+        <select name="categories_id" class="form-control" required>
+            <option value="">-- Pilih Kategori --</option>
+            @foreach ($categories as $c)
+                <option value="{{ $c->id }}">{{ $c->nama_kategori }}</option>
+            @endforeach
+        </select>
+        <label>Nama Produk</label>
+        <input type="text" name="nama_produk" class="form-control" required>
+        <label>Harga</label>
+        <input type="number" name="harga" class="form-control" required>
+        <label>Stok</label>
+        <input type="number" name="stok" class="form-control" required>
+        <label>Deskripsi</label>
+        <textarea name="deskripsi" class="form-control" required></textarea>
+        <label>Tanggal Upload</label>
+        <input type="date" name="tanggal_upload" class="form-control" required>
+        <label>Upload Gambar (Bisa Banyak)</label>
+        <input type="file" name="gambar[]" class="form-control" multiple required>
+        <br>
+        <button type="submit" class="btn btn-primary">Tambah Produk</button>
+    </form>
 @endsection

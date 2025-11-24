@@ -202,7 +202,6 @@
         </div>
     </div>
 @endforeach
-
 <!-- Modal Tambah Produk -->
 <div class="modal fade" id="modalCreateProduct" tabindex="-1" aria-labelledby="modalCreateProductLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -211,15 +210,10 @@
                 <h5 class="modal-title" id="modalCreateProductLabel">Tambah Produk</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            {{-- SESUAIKAN route() DENGAN ROUTE KAMU --}}
             <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
                 <div class="modal-body">
-                    {{-- Kirim otomatis stores_id --}}
                     <input type="hidden" name="stores_id" value="{{ $toko?->id }}">
-
                     {{-- Kategori --}}
                     <div class="mb-3">
                         <label for="categories_id" class="form-label fw-semibold">
@@ -237,7 +231,6 @@
                             </select>
                         </div>
                     </div>
-
                     {{-- Nama Produk --}}
                     <div class="mb-3">
                         <label for="nama_produk" class="form-label fw-semibold">
@@ -257,7 +250,6 @@
                                 maxlength="100">
                         </div>
                     </div>
-
                     {{-- Harga --}}
                     <div class="mb-3">
                         <label for="harga" class="form-label fw-semibold">
@@ -277,7 +269,6 @@
                                 placeholder="Masukan Harga Produk">
                         </div>
                     </div>
-
                     {{-- Stok --}}
                     <div class="mb-3">
                         <label for="stok" class="form-label fw-semibold">
@@ -297,7 +288,6 @@
                                 placeholder="Masukan Stok Produk">
                         </div>
                     </div>
-
                     {{-- Deskripsi --}}
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label fw-semibold">
@@ -316,7 +306,6 @@
                                 placeholder="Masukan Deskripsi Produk"></textarea>
                         </div>
                     </div>
-
                     {{-- Gambar --}}
                     <div class="mb-3">
                         <label for="gambar" class="form-label fw-semibold">
@@ -336,9 +325,7 @@
                                 required>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Batal
@@ -457,8 +444,6 @@
         </div>
     </div>
 @endforeach
-
-
 <div class="container my-5">
     <!-- Alerts -->
     @if (Session::get('pesan'))
@@ -477,7 +462,6 @@
             </ul>
         </div>
     @endif
-
     {{-- Jika belum punya toko --}}
     @if(!$toko)
         <div class="text-center my-5">

@@ -2,19 +2,16 @@
 @section('content')
 <style>
     .nav-pills .nav-link {
-        color: #000; /* warna text normal */
+        color: #000;
     }
-
     .nav-pills .nav-link:hover {
-        background-color: #000; /* warna malachite */
-        color: #fff; /* text putih saat hover */
+        background-color: #000;
+        color: #fff;
     }
-
     .nav-pills .nav-link.active {
-        background-color: #000 !important; /* warna active */
+        background-color: #000 !important;
         color: #fff !important;
     }
-
 </style>
 <div class="container mt-5">
     <div class="text-center mb-5">
@@ -22,14 +19,12 @@
         <p class="text-muted">Temukan berbagai kebutuhan sekolah dari penjual terpercaya di Skoola</p>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <!-- NAV PILLS KATEGORI -->
         <div class="col-md-3 mb-4">
             <div class="card border-0 shadow-sm p-3">
                 <h6 class="fw-bold mb-3">Filter Kategori</h6>
-
                 <ul class="nav nav-pills flex-column">
                     @foreach ($category as $key => $item)
                         <li class="nav-item mb-1">
@@ -43,7 +38,6 @@
                 </ul>
             </div>
         </div>
-
         <!-- TAB CONTENT PRODUK -->
         <div class="col-md-9">
             <div class="tab-content">

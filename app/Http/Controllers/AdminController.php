@@ -49,7 +49,6 @@ class AdminController extends Controller
             $id = $this->decrypId($id);
             $data['stores'] = Store::findOrFail($id);
         }
-
         $data['stores'] = Store::all();
         $data['user'] = User::all();
         return view('Administrator.Toko.toko', $data);

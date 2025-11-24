@@ -80,7 +80,6 @@
         </ul>
     </div>
 @endif
-
 <div class="container">
     <div class="d-flex justify-content-between">
         <h2 class="mt-4 fw-bold">Kategori</h2>

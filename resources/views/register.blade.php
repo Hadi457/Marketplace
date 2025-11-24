@@ -42,12 +42,10 @@
                         <label for="kontak">Kontak</label>
                         <input id="kontak" name="kontak" type="text" class="form-control" placeholder="Masukkan kontak" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="password">Password</label>
                         <input id="password" name="password" type="password" class="form-control" placeholder="Masukkan password" required>
                     </div>
-
                     <div class="d-grid gap-2 mt-2">
                         <button type="submit" class="btn btn-login">Masuk</button>
                     </div>

@@ -22,7 +22,6 @@
             <a href="/toko" class="btn btn-lihat">Lihat Semua</a>
         </div>
     </div>
-    <!-- Card -->
     <div class="row">
         @foreach ($stores as $item)
             <div class="col-4">
@@ -30,7 +29,6 @@
                     <div class="card-body">
                         <div class="d-flex align-items-start mb-2">
                             <div class="bg rounded-3 d-flex align-items-center justify-content-center me-3" style="width:54px;height:54px;border-radius:10px;">
-                                {{-- <strong class="text-inisial">KT</strong> --}}
                                 <img src="{{ asset('storage/gambar-toko/' . $item->gambar) }}" style="object-fit: cover;" width="50" height="50" alt="">
                             </div>
                             <div class="flex-grow-1">

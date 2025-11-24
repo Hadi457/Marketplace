@@ -44,7 +44,6 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-
         if(Auth::attempt($validated)){
             $user = Auth::user();
             if($user->role == 'admin'){
@@ -58,8 +57,7 @@ class AuthController extends Controller
                 return redirect()->route('login')->with('pesan', 'Access denied. Invalid role.');
             }
         } else {
-
-            return redirect()->route('login')->with('pesan', 'Username atau Password salah!');
+            return redirect()->route('login')->with('pesaneror', 'Username atau Password salah!');
         }
         
     }

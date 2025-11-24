@@ -25,7 +25,6 @@ class ProductController extends Controller
     }
 
     public function Index(){
-        // $data['products'] = Product::with(['imageProducts', 'store'])->get();
         $data['category'] = Category::with(['products.imageProducts'])->get();
         return view('produk', $data);
     }
@@ -33,14 +32,10 @@ class ProductController extends Controller
     public function Create()
     {
         $data['categories'] = Category::all();
-
-        // Ambil toko milik user login
         $data['store'] = Store::where('users_id', Auth::id())->first();
-
         if (!$data['store']) {
             return redirect()->back()->with('error', 'Anda belum memiliki toko.');
         }
-
         return view('Member.Produk.produk-create', $data);
     }
 
@@ -56,23 +51,19 @@ class ProductController extends Controller
             'tanggal_upload' => 'nullable|date',
             'gambar.*' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
-
         $product = Product::create([
             'categories_id' => $request->categories_id,
-            'stores_id' => $request->stores_id, // otomatis dari hidden input
+            'stores_id' => $request->stores_id,
             'nama_produk' => $request->nama_produk,
             'harga' => $request->harga,
             'stok' => $request->stok,
             'deskripsi' => $request->deskripsi,
             'tanggal_upload' => now(),
         ]);
-
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $img) {
-
                 $filename = time() . '_' . uniqid() . '.' . $img->getClientOriginalExtension();
                 $img->storeAs('public/gambar-produk', $filename);
-
                 ImageProduct::create([
                     'products_id' => $product->id,
                     'nama_gambar' => $filename,
@@ -86,7 +77,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $request->validate([
+        $validate = $request->validate([
             'categories_id' => 'required|exists:categories,id',
             'stores_id' => 'required|exists:stores,id',
             'nama_produk' => 'required|string|max:100',
@@ -96,50 +87,29 @@ class ProductController extends Controller
             'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Update data produk
-        $product->update([
-            'categories_id' => $request->categories_id,
-            'stores_id' => $request->stores_id,
-            'nama_produk' => $request->nama_produk,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'deskripsi' => $request->deskripsi,
-            'tanggal_upload' => $product->tanggal_upload, // tetap
-        ]);
+        $product->update([$validate]);
 
-        // Jika user upload gambar baru
         if ($request->hasFile('gambar')) {
-
             foreach ($request->file('gambar') as $img) {
                 $filename = time() . '_' . uniqid() . '.' . $img->getClientOriginalExtension();
                 $img->storeAs('public/gambar-produk', $filename);
-
                 ImageProduct::create([
                     'products_id' => $product->id,
                     'nama_gambar' => $filename,
                 ]);
             }
         }
-
         return redirect()->back()->with('pesan', 'Produk berhasil diupdate!');
     }
-
 
     public function Delete($id){
         $id = $this->decrypId($id);
         $product = Product::findOrFail($id);
-
-        // Hapus gambar terkait
         foreach ($product->imageProducts as $image) {
-            // Hapus file gambarnya dari storage
             Storage::delete('public/gambar-produk/' . $image->nama_gambar);
-            // Hapus record gambarnya dari database
             $image->delete();
         }
-
-        // Hapus produk
         $product->delete();
-
         return redirect()->back()->with('pesan', 'Produk berhasil dihapus!');
     }
 
@@ -152,12 +122,9 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('q');
-
-        // Cari berdasarkan nama produk / deskripsi
         $products = Product::where('nama_produk', 'like', '%' . $keyword . '%')
             ->orWhere('deskripsi', 'like', '%' . $keyword . '%')
             ->get();
-
         return view('Member.Produk.search-produk', compact('products', 'keyword'));
     }
 }

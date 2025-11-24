@@ -64,7 +64,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal Edit User -->
 @foreach ($users as $item)
     <div class="modal fade" id="editUser{{ $item->id }}" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
@@ -153,7 +152,6 @@
         </ul>
     </div>
 @endif
-
 <div class="container">
     <div class="d-flex justify-content-between">
         <h2 class="mt-4 fw-bold">User</h2>

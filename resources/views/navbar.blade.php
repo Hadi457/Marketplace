@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="{{ asset('style/navbar.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-        
         <title>Skoola</title>
     </head>
     <body>

@@ -20,6 +20,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>  
                     @endif
+                    @if (Session::get('pesaneror'))
+                        <div class="alert alert-danger alert-dismissible fade show mb-1 mt-2" role="alert">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                            {{ Session::get('pesaneror') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>  
+                    @endif
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">

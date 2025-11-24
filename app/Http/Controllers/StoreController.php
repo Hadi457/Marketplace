@@ -34,7 +34,6 @@ class StoreController extends Controller
             $data['products'] = Product::findOrFail($id);
             $data['stores']   = Store::findOrFail($id);
         }
-
         $data['categories'] = Category::all();
 
         // semua toko milik user
