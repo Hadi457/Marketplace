@@ -47,7 +47,6 @@
                         <li><strong>Kategori:</strong> {{ $product->category->nama_kategori ?? '—' }}</li>
                         <li><strong>Toko:</strong> {{ $product->store->nama_toko ?? '—' }}</li>
                         <li><strong>Tanggal Upload:</strong> {{ \Carbon\Carbon::parse($product->tanggal_upload)->format('d F Y') }}</li>
-                        <li><strong>Dibuat:</strong> {{ $product->created_at->diffForHumans() }}</li>
                     </ul>
                     <div class="mt-auto d-flex gap-2">
                         <a href="https://wa.me/{{ $product->store->kontak_toko }}?text=Halo%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama_produk) }}" target="_blank" class="btn btn-outline-success">
@@ -60,16 +59,4 @@
         </div>
     </div>
 </div>
-@push('scripts')
-    <script>
-        document.addEventListener('click', function(e){
-            const t = e.target;
-            if(t.classList.contains('thumb-img')){
-                const src = t.getAttribute('data-src');
-                const main = document.getElementById('mainImage');
-                if(main && src) main.src = src;
-            }
-        });
-    </script>
-@endpush
 @endsection
