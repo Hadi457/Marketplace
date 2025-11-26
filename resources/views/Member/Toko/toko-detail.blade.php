@@ -65,7 +65,7 @@
         <a href="{{ url()->previous() }}" class="btn btn-light me-3">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <h2 class="mb-0">Toko <strong>{{ $store->nama_toko }}</strong></h2>
+        <h2 class="mb-0"><strong>{{ $store->nama_toko }}</strong></h2>
     </div>
     <!-- Profil Toko -->
     <div class="card border-0 shadow-sm mb-4">
