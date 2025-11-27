@@ -29,7 +29,7 @@ class AdminController extends Controller
     }
     
     public function Beranda(){
-        $data['products'] = Product::with(['imageProducts', 'store'])->latest()->get();
+        $data['products'] = Product::with(['imageProducts', 'store'])->take(4)->get();
         $data['stores'] = Store::take(4)->get();
         $data['users'] = User::take(4)->get();
         return view('beranda', $data);
