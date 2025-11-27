@@ -61,7 +61,7 @@
                                 <i class="bi bi-person-circle fs-3 ms-3"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a href="/toko/toko-member" class="dropdown-item">Toko</a></li>
+                                <li><a href="/toko/toko-member" class="dropdown-item">Toko Saya</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
