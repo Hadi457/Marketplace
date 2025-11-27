@@ -87,7 +87,15 @@ class ProductController extends Controller
             'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $product->update([$validate]);
+        $product->update([
+            'categories_id' => $request->categories_id,
+            'stores_id'     => $request->stores_id,
+            'nama_produk'   => $request->nama_produk,
+            'harga'         => $request->harga,
+            'stok'          => $request->stok,
+            'deskripsi'     => $request->deskripsi,
+        ]);
+
 
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $img) {
